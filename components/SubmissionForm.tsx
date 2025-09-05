@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SignatureCanvas } from './SignatureCanvas';
+import React, { useState, useRef } from 'react';
+import { SignatureCanvas, SignatureCanvasRef } from './SignatureCanvas';
 
 interface SubmissionFormProps {
 	onSubmit: (
@@ -18,6 +18,7 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 	const [signature, setSignature] = useState<string | null>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const signatureRef = useRef<SignatureCanvasRef>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -42,6 +43,7 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 			setSocialSecurity('');
 			setPassword('');
 			setSignature(null);
+			signatureRef.current?.clear();
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -110,6 +112,7 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 					/>
 				</div>
 				<SignatureCanvas
+					ref={signatureRef}
 					onSignatureChange={setSignature}
 					disabled={isSubmitting}
 				/>

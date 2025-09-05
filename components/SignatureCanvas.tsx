@@ -1,14 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 interface SignatureCanvasProps {
 	onSignatureChange: (signature: string | null) => void;
 	disabled?: boolean;
 }
 
-export const SignatureCanvas: React.FC<SignatureCanvasProps> = ({
-	onSignatureChange,
-	disabled,
-}) => {
+export interface SignatureCanvasRef {
+	clear: () => void;
+}
+
+export const SignatureCanvas = forwardRef<SignatureCanvasRef, SignatureCanvasProps>(({ onSignatureChange, disabled }, ref) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [isDrawing, setIsDrawing] = useState(false);
 	const [isEmpty, setIsEmpty] = useState(true);
@@ -71,6 +72,10 @@ export const SignatureCanvas: React.FC<SignatureCanvasProps> = ({
 		onSignatureChange(null);
 	};
 
+	useImperativeHandle(ref, () => ({
+		clear: clearSignature
+	}));
+
 	return (
 		<div>
 			<label className="block text-sm font-medium text-text-primary mb-2">
@@ -99,4 +104,4 @@ export const SignatureCanvas: React.FC<SignatureCanvasProps> = ({
 			</div>
 		</div>
 	);
-};
+});
