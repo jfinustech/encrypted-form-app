@@ -30,7 +30,7 @@ export const PasswordSetup: React.FC<PasswordSetupProps> = ({
 	return (
 		<div className="fixed inset-0 bg-background flex justify-center items-center z-50 p-4">
 			<div className="bg-card rounded-lg shadow-lg p-6 w-full max-w-sm mx-auto">
-				<h2 className="text-xl font-bold text-gray-800">
+				<h2 className="text-lg font-semi-bold text-gray-800">
 					Set a Password
 				</h2>
 				<form onSubmit={handleSetPassword} className="mt-4 space-y-4">

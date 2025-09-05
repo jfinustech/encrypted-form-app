@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
 				<div className="flex items-center space-x-3">
 					<SbIcon />
-					<h1 className="text-2xl font-semibold text-gray-700">
+					<h1 className="text-2xl font-semi-bold text-gray-700">
 						Sourcebooks
 					</h1>
 				</div>

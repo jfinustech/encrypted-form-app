@@ -20,7 +20,12 @@ const App: React.FC = () => {
 	);
 
 	const handleFormSubmit = useCallback(
-		async (name: string, message: string, socialSecurity: string, signature: string | null) => {
+		async (
+			name: string,
+			message: string,
+			socialSecurity: string,
+			signature: string | null,
+		) => {
 			try {
 				const key = await generateKey();
 				const exportedKey = await exportKey(key);
@@ -69,13 +74,13 @@ const App: React.FC = () => {
 			<main className="container mx-auto px-4 py-8">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 					<div>
-						<h2 className="text-lg font-semibold mb-4 text-gray-800">
+						<h2 className="text-lg font-semi-bold mb-4 text-gray-800">
 							Secure Message
 						</h2>
 						<SubmissionForm onSubmit={handleFormSubmit} />
 					</div>
 					<div>
-						<h2 className="text-lg font-semibold mb-4 text-gray-800">
+						<h2 className="text-lg font-semi-bold mb-4 text-gray-800">
 							Submissions
 						</h2>
 
