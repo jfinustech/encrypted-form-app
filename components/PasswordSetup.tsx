@@ -25,17 +25,10 @@ export const PasswordSetup: React.FC<PasswordSetupProps> = ({ onPasswordSet }) =
 
   return (
     <div className="fixed inset-0 bg-background flex justify-center items-center z-50 p-4">
-      <div className="bg-card rounded-lg shadow-2xl p-6 w-full max-w-sm mx-auto">
+      <div className="bg-card rounded-lg shadow-lg p-6 w-full max-w-sm mx-auto">
         <h2 className="text-xl font-bold text-gray-800">Set a Password</h2>
-        <p className="mt-2 text-text-secondary">
-          Before you can submit forms, please set a password. This password will be required for every submission.
-          <strong className="block text-red-600 mt-2">Store it safely! It's saved only on this device.</strong>
-        </p>
         <form onSubmit={handleSetPassword} className="mt-4 space-y-4">
           <div>
-            <label htmlFor="password-setup" className="block text-sm font-medium text-text-primary">
-              New Password
-            </label>
             <input
               type="password"
               id="password-setup"
