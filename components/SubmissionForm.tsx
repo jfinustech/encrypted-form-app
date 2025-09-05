@@ -97,9 +97,14 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 						type="text"
 						id="socialSecurity"
 						value={socialSecurity}
-						onChange={(e) => setSocialSecurity(e.target.value)}
+						onChange={(e) => {
+							const value = e.target.value.replace(/\D/g, '');
+							const formatted = value.replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3');
+							setSocialSecurity(formatted);
+						}}
+						maxLength={11}
 						className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-						placeholder="XXX-XX-XXXX"
+						placeholder="000-00-0000"
 						disabled={isSubmitting}
 						aria-required="true"
 					/>
