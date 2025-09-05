@@ -50,14 +50,14 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
             </p>
             <p className="text-sm text-text-secondary">
                 <span className="font-semibold text-text-primary">Encrypted Data:</span> 
-                <textarea className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">{submission.encryptedData}</textarea>
+                <textarea defaultValue={submission.encryptedData} className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"/>
                 
             </p>
             <div className="flex flex-col sm:flex-row gap-2">
                 <input 
                     type="password"
                     placeholder="Enter decryption key"
-                    value={decryptionKey}
+                    defaultValue={decryptionKey}
                     onChange={(e) => setDecryptionKey(e.target.value)}
                     className="flex-grow w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     aria-label={`Decryption key for submission ${submission.id}`}
@@ -76,7 +76,7 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
                     <h4 className="font-semibold text-text-primary">Decrypted Content:</h4>
                     <div>
                         <p className="text-sm font-medium text-gray-500">Name</p>
-                        <p className="text-base text-text-primary">{decryptedContent.name}</p>
+                        <p className="text-base text-text-primary whitespace-pre-wrap font-sans bg-white p-2 border rounded-md">{decryptedContent.name}</p>
                     </div>
                     <div>
                         <p className="text-sm font-medium text-gray-500">Message</p>
@@ -85,12 +85,14 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
                     {decryptedContent.signature && (
                         <div>
                             <p className="text-sm font-medium text-gray-500">Signature</p>
-                            <img src={decryptedContent.signature} alt="Digital signature" className="border rounded-md max-w-full h-auto" />
+                            <div className="text-base text-text-primary whitespace-pre-wrap font-sans bg-white p-2 border rounded-md">
+                            <img src={decryptedContent.signature} alt="Digital signature" className="max-w-full h-auto" />
+                            </div>
                         </div>
                     )}
                      <div>
                         <p className="text-sm font-medium text-gray-500">Submitted At</p>
-                        <p className="text-base text-text-primary">{new Date(decryptedContent.submittedAt).toLocaleString()}</p>
+                        <p className="text-sm text-text-primary mt-2">{new Date(decryptedContent.submittedAt).toLocaleString()}</p>
                     </div>
                 </div>
             )}
