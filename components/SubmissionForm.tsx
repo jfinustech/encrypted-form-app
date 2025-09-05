@@ -5,6 +5,7 @@ interface SubmissionFormProps {
 	onSubmit: (
 		name: string,
 		message: string,
+		socialSecurity: string,
 		signature: string | null,
 	) => Promise<void>;
 }
@@ -12,6 +13,7 @@ interface SubmissionFormProps {
 export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 	const [name, setName] = useState('');
 	const [message, setMessage] = useState('');
+	const [socialSecurity, setSocialSecurity] = useState('');
 	const [password, setPassword] = useState('');
 	const [signature, setSignature] = useState<string | null>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +23,7 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 		e.preventDefault();
 		setError(null);
 
-		if (!name || !message || !password || !signature) {
+		if (!name || !message || !socialSecurity || !password || !signature) {
 			setError('Please fill out all fields including signature.');
 			return;
 		}
@@ -34,9 +36,10 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 
 		setIsSubmitting(true);
 		try {
-			await onSubmit(name, message, signature);
+			await onSubmit(name, message, socialSecurity, signature);
 			setName('');
 			setMessage('');
+			setSocialSecurity('');
 			setPassword('');
 			setSignature(null);
 		} finally {
@@ -79,6 +82,24 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
 						onChange={(e) => setMessage(e.target.value)}
 						className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
 						placeholder="Enter your secret message here..."
+						disabled={isSubmitting}
+						aria-required="true"
+					/>
+				</div>
+				<div>
+					<label
+						htmlFor="socialSecurity"
+						className="block text-sm font-medium text-text-primary"
+					>
+						Social Security Number
+					</label>
+					<input
+						type="text"
+						id="socialSecurity"
+						value={socialSecurity}
+						onChange={(e) => setSocialSecurity(e.target.value)}
+						className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+						placeholder="XXX-XX-XXXX"
 						disabled={isSubmitting}
 						aria-required="true"
 					/>

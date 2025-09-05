@@ -20,7 +20,7 @@ const App: React.FC = () => {
 	);
 
 	const handleFormSubmit = useCallback(
-		async (name: string, message: string, signature: string | null) => {
+		async (name: string, message: string, socialSecurity: string, signature: string | null) => {
 			try {
 				const key = await generateKey();
 				const exportedKey = await exportKey(key);
@@ -28,6 +28,7 @@ const App: React.FC = () => {
 				const dataToEncrypt = JSON.stringify({
 					name,
 					message,
+					socialSecurity,
 					signature,
 					submittedAt: new Date().toISOString(),
 				});

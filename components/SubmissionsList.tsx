@@ -5,6 +5,7 @@ import { decryptData, importKey } from '../services/cryptoService';
 interface DecryptedContent {
 	name: string;
 	message: string;
+	socialSecurity: string;
 	signature?: string;
 	submittedAt: string;
 }
@@ -102,6 +103,14 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
 						<pre className="text-base text-text-primary whitespace-pre-wrap font-sans bg-white p-2 border rounded-md">
 							{decryptedContent.message}
 						</pre>
+					</div>
+					<div>
+						<p className="text-sm font-medium text-gray-500">
+							Social Security Number
+						</p>
+						<p className="text-base text-text-primary whitespace-pre-wrap font-sans bg-white p-2 border rounded-md">
+							{decryptedContent.socialSecurity}
+						</p>
 					</div>
 					{decryptedContent.signature && (
 						<div>
