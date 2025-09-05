@@ -1,0 +1,5 @@
+{
+  "name": "Secure Form E2EE",
+  "description": "A web application that demonstrates end-to-end encryption for form submissions. Data is encrypted in the browser before being stored, and a key is required for decryption.",
+  "requestFramePermissions": []
+}
